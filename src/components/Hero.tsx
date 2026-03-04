@@ -2,10 +2,19 @@ type HeroProps = {
   name: string;
   title: string;
   description: string;
+  avatarUrl?: string;
 };
 
+const DEFAULT_AVATAR_URL =
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix";
+
 // Hero 区域：大标题 + 简介 + 头像
-export function Hero({ name, title, description }: HeroProps) {
+export function Hero({
+  name,
+  title,
+  description,
+  avatarUrl = DEFAULT_AVATAR_URL,
+}: HeroProps) {
   return (
     <section className="flex flex-col items-center gap-10 py-10 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
       <div className="space-y-4 max-w-xl">
@@ -21,11 +30,13 @@ export function Hero({ name, title, description }: HeroProps) {
         <p className="text-sm text-neutral-300 sm:text-base">{description}</p>
       </div>
 
-      <div className="relative h-32 w-32 flex-shrink-0 overflow-hidden rounded-full border border-white/10 bg-neutral-900/80 shadow-[0_0_40px_rgba(56,189,248,0.35)] sm:h-40 sm:w-40">
-        <div className="absolute inset-0 bg-accent-gradient opacity-70" />
-        <div className="relative flex h-full w-full items-center justify-center text-4xl font-semibold text-white/90">
-          {name.slice(0, 1)}
-        </div>
+      <div className="relative h-32 w-32 flex-shrink-0 overflow-hidden rounded-full border border-sky-400/40 bg-gradient-to-tr from-sky-500/40 via-fuchsia-500/30 to-emerald-400/40 shadow-[0_0_45px_rgba(56,189,248,0.5)] sm:h-40 sm:w-40">
+        <img
+          src={avatarUrl}
+          alt={name}
+          className="h-full w-full rounded-full object-cover ring-2 ring-white/10"
+          loading="lazy"
+        />
       </div>
     </section>
   );
